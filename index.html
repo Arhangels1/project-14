@@ -11,7 +11,7 @@
   <script type="module" crossorigin src="/project-14/commonHelpers.js"></script>
   <link rel="modulepreload" crossorigin href="/project-14/assets/vendor-b2236c86.js">
   <link rel="stylesheet" href="/project-14/assets/vendor-2977f375.css">
-  <link rel="stylesheet" href="/project-14/assets/index-2b6e9565.css">
+  <link rel="stylesheet" href="/project-14/assets/index-7811a831.css">
 </head>
 
 <body>
@@ -71,7 +71,7 @@
             type="button"
             aria-label="Mobile menu button">
         <svg class="mobile-menu-btn-icon" width="28" height="28">
-<!--             <use href="./"></use> -->
+            <use href="/project-14/assets/sprite-7ef3275a.svg#icon-burger-menu"></use>
         </svg>
         </button>
         </nav>
@@ -531,7 +531,26 @@
   </div>
 </div>
 
-    
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true" role="navigation">
+<div class="mobile-menu-container">
+    <button id="menu-close" class="mobile-menu-close" aria-label="Close menu">
+        <svg width="32" height="32">
+            <use href="/project-14/assets/sprite-7ef3275a.svg#icon-x"></use>
+        </svg>
+    </button>
+    <div class="mobile-menu-content">
+        <ul class="mobile-menu-list">
+            <li><a class="mobile-menu-item" href="#about-me">About me</a></li>
+            <li><a class="mobile-menu-item" href="#benefits">Benefits</a></li>
+            <li><a class="mobile-menu-item" href="#projects">Projects</a></li>
+            <li><a class="mobile-menu-item" href="#faq">FAQ</a></li>
+        </ul>
+        <a class="mobile-menu-order-btn"
+        href="#work-together"
+        aria-label="Order the project link">Order the project</a>
+    </div>
+</div>
+</div>
 
   </main>
 
