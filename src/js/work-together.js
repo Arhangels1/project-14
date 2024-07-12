@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
 import 'animate.css';
-import {postRequest} from "./portfolio-api-service.js";
+import { postRequest } from './portfolio-api-service.js';
 import disableScroll from 'disable-scroll';
 
 const form = document.querySelector('.footer__form');
@@ -11,29 +11,29 @@ const loader = document.querySelector('.loader');
 const backdrop = document.querySelector('.backdrop');
 const modal = document.querySelector('.modal');
 
-const maxLength = 33
-let originalString = ''
+const maxLength = 33;
+let originalString = '';
 
 email.addEventListener('input', debounce(checkValidity, 300));
-comments.addEventListener('input', inputEnough)
-comments.addEventListener('blur', inputBlur)
-comments.addEventListener('focus', inputFocus)
-form.addEventListener('submit', onSubmit)
-backdrop.addEventListener('click', onBackdropClick)
+comments.addEventListener('input', inputEnough);
+comments.addEventListener('blur', inputBlur);
+comments.addEventListener('focus', inputFocus);
+form.addEventListener('submit', onSubmit);
+backdrop.addEventListener('click', onBackdropClick);
 
 function checkValidity(e) {
-  toggleValids(e)
-  checkIsEmailEmpty()
+  toggleValids(e);
+  checkIsEmailEmpty();
 }
 
 function checkIsEmailEmpty() {
   if (email.value.length <= 0) {
-    isValid.textContent = ''
+    isValid.textContent = '';
   }
 }
 
 function inputEnough(e) {
-  originalString = e.target.value
+  originalString = e.target.value;
 }
 
 function inputBlur(e) {
@@ -47,94 +47,96 @@ function inputFocus(e) {
 }
 
 function onSubmit(e) {
-  e.preventDefault()
+  e.preventDefault();
   const formData = new FormData(form);
 
-  loader.classList.remove('is-hidden')
-  postRequest(Object.fromEntries(formData)).then(res => {
-    loader.classList.add('is-hidden')
+  loader.classList.remove('is-hidden');
+  postRequest(Object.fromEntries(formData))
+    .then(res => {
+      loader.classList.add('is-hidden');
 
-    modal.innerHTML = makeModalContent(res.data)
-    toggleModal()
-    disableScroll.on();
-    window.addEventListener('keydown', closeByEscape)
-    addCloseBtnEventListener()
-  }).catch(err => {
-    modal.innerHTML = makeModalContent({title: 'Error'})
-    addCloseBtnEventListener()
-    toggleModal()
-  })
+      modal.innerHTML = makeModalContent(res.data);
+      toggleModal();
+      disableScroll.on();
+      window.addEventListener('keydown', closeByEscape);
+      addCloseBtnEventListener();
+    })
+    .catch(err => {
+      modal.innerHTML = makeModalContent({ title: 'Error' });
+      addCloseBtnEventListener();
+      toggleModal();
+    });
 
-  resetValues()
+  resetValues();
 }
 
 function closeByEscape(e) {
   if (e.code === 'Escape') {
-    closeModal()
+    closeModal();
   }
 }
 
 function toggleValids(e) {
   if (e.target.checkValidity()) {
-    isValid.classList.add('footer__form--valid')
-    isValid.classList.remove('footer__form--invalid')
-    isValid.textContent = 'Success'
+    isValid.classList.add('footer__form--valid');
+    isValid.classList.remove('footer__form--invalid');
+    isValid.textContent = 'Success';
   } else {
-    isValid.classList.remove('footer__form--valid')
-    isValid.classList.add('footer__form--invalid')
-    isValid.textContent = 'Invalid email, try again'
+    isValid.classList.remove('footer__form--valid');
+    isValid.classList.add('footer__form--invalid');
+    isValid.textContent = 'Invalid email, try again';
   }
 }
 
 function toggleModal() {
-  backdrop.classList.toggle('is-hidden--modal')
-  modal.classList.toggle('animate__bounceInRight')
-  modal.classList.toggle('backdrop__modal__animation')
+  backdrop.classList.toggle('is-hidden--modal');
+  modal.classList.toggle('animate__bounceInRight');
+  modal.classList.toggle('backdrop__modal__animation');
 }
 
 function resetValues() {
-  email.value = ''
-  comments.value = ''
-  isValid.textContent = ''
-  originalString = ''
+  email.value = '';
+  comments.value = '';
+  isValid.textContent = '';
+  originalString = '';
 }
 
 function onBackdropClick(e) {
   if (e.currentTarget === e.target) {
-    closeModal()
+    closeModal();
   }
 }
 
 function closeModal() {
-  toggleModal()
-  outModal()
-  modal.addEventListener('animationend', outModalAndDeleteEventListeners)
+  toggleModal();
+  outModal();
+  modal.addEventListener('animationend', outModalAndDeleteEventListeners);
   disableScroll.off();
-  window.removeEventListener('keydown', closeByEscape)
+  window.removeEventListener('keydown', closeByEscape);
 }
 
-function makeModalContent({title, message}) {
+function makeModalContent({ title, message }) {
   return `<div class="backdrop__modal__content">
         <svg width="24" height="24" class="modal__close-icon">
-        <use href="./img/sprite.svg#icon-x"></use>
-      </svg>
+          <use href="../img/sprite.svg#icon-x"></use>
+        </svg>
         <h4>${title}</h4>
         ${message ? `<p>${message}</p>` : ''}
-      </div>`
+      </div>`;
 }
 
 function outModalAndDeleteEventListeners() {
-  outModal()
-  modal.removeEventListener('animationend', outModalAndDeleteEventListeners)
+  outModal();
+  modal.removeEventListener('animationend', outModalAndDeleteEventListeners);
 }
 
 function outModal() {
-  backdrop.classList.toggle('is-hidden--modal')
-  modal.classList.toggle('animate__bounceOutRight')
-  modal.classList.toggle('backdrop__modal__out__animation')
+  backdrop.classList.toggle('is-hidden--modal');
+  modal.classList.toggle('animate__bounceOutRight');
+  modal.classList.toggle('backdrop__modal__out__animation');
 }
 
-function addCloseBtnEventListener(){
-  const closeBtn = document.querySelector('.modal__close-icon')
-  closeBtn.addEventListener('click', closeModal)
+function addCloseBtnEventListener() {
+  const closeBtn = document.querySelector('.modal__close-icon');
+  closeBtn.addEventListener('click', closeModal);
 }
