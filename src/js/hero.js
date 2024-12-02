@@ -4,9 +4,9 @@ const heroContacts = document.getElementById('hero-contacts');
 const socialMediaList = document.createElement('ul');
 
 const socialMediaLinks = [
-    { name: 'IG', url: 'https://www.instagram.com/goitclub/' },
-    { name: 'FB', url: 'https://www.facebook.com/goITclub/' },
-    { name: 'YT', url: 'https://www.youtube.com/c/GoIT' },
+    { name: 'IG', url: 'https://www.instagram.com/aleksander.evko/profilecard/?igsh=NHpsdWlwZDlnOGU1' },
+    { name: 'FB', url: 'https://www.facebook.com/share/18wxv2tWL4/?mibextid=LQQJ4d' },
+    { name: 'YT', url: 'https://youtube.com/@arhangels50?si=-lomno3ptGN2ZwR_' },
     { name: 'GH', url: 'https://github.com/Arhangels1/project-14' }
 ];
 
